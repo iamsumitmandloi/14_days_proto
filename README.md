@@ -61,7 +61,7 @@ alter table stability_logs disable row level security;
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173)
+Open [https://iamsumitmandloi.github.io/14_days_proto/](https://iamsumitmandloi.github.io/14_days_proto/)
 
 ## License
 
