@@ -1,16 +1,68 @@
-# React + Vite
+# 14-Day Stability Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal daily habit tracker built with **React + Vite + Supabase**. Track 4 metrics—pushups, deep work, steps, and cigarettes—score each day out of 4, and visualize your 14-day progress.
 
-Currently, two official plugins are available:
+![14-Day Stability Tracker](assets/screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- ✅ Toggle tracking for **Pushups** and **Deep Work**
+- 🔢 Number inputs for **Steps** (15k goal) and **Cigarettes** (≤3 limit)
+- 📊 Daily score out of 4
+- 📈 14-day progress bar with history
+- ☁️ Data persistence via **Supabase** (Postgres)
+- 🔐 Environment variables for secrets (`.env`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **React 19** — UI
+- **Vite 7** — Build tool + dev server
+- **Supabase** — Backend (REST API + Postgres)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Setup
+
+### 1. Clone & Install
+
+```bash
+git clone https://github.com/iamsumitmandloi/14_days_proto.git
+cd 14_days_proto
+npm install
+```
+
+### 2. Configure Supabase
+
+Create a `.env` file at the project root:
+
+```env
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key-here
+```
+
+### 3. Create the Database Table
+
+In your [Supabase SQL Editor](https://supabase.com/dashboard), run:
+
+```sql
+create table stability_logs (
+  date text primary key,
+  pushups_done boolean default false,
+  deep_work_done boolean default false,
+  steps_count integer default 0,
+  cigarettes_count integer default 0,
+  score integer default 0
+);
+
+alter table stability_logs disable row level security;
+```
+
+### 4. Run
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173)
+
+## License
+
+MIT
